@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <defs>
+    <style>
+      .add-str {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 6px;
+      }
+
+      .add-bg {
+        fill: #48f;
+      }
+    </style>
+  </defs>
+  <circle class="add-bg" cx="30" cy="30" r="30"/>
+  <path class="add-str" d="M18,30h24"/>
+  <path class="add-str" d="M30,18v24"/>
+</svg>
