@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/newtdl/static/js/main.06c2241b.js",
+    "static/media/picker.svg": "/newtdl/static/media/picker.74a38e907d27503245924bc5ca7a19ba.svg",
+    "static/media/star.svg": "/newtdl/static/media/star.d473da2965f945fdd6b4cab3852f1b89.svg",
+    "static/media/trash.svg": "/newtdl/static/media/trash.2ab456c73ca318a8b3f2eef84ca09676.svg",
+    "static/media/light.svg": "/newtdl/static/media/light.ad0a7aec74379c05bee6854c88f52a31.svg",
+    "static/media/check.svg": "/newtdl/static/media/check.62db56c7f52718612f4359d67d6bd981.svg",
+    "static/media/clock.svg": "/newtdl/static/media/clock.a168818d876dc44c21c63d1d5e182366.svg",
+    "static/media/submit.svg": "/newtdl/static/media/submit.bd02e916f815952d4aafb562b47bd5e3.svg",
+    "static/media/add.svg": "/newtdl/static/media/add.5b523a0b49843a406d22420f02ae3b52.svg",
+    "static/media/dark.svg": "/newtdl/static/media/dark.2f933fa640d013d8fcffd83eaad6b238.svg",
+    "index.html": "/newtdl/index.html",
+    "static/media/x.svg": "/newtdl/static/media/x.d486efbe7d4c2943c270e70d51876fcd.svg",
+    "main.06c2241b.js.map": "/newtdl/static/js/main.06c2241b.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.06c2241b.js"
+  ]
+}
