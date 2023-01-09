@@ -51,7 +51,13 @@ const Left = styled.div`
 
 const ItemBg = styled.li<IStyled>`
 	color: ${({ bgColor, done, theme }) =>
-		+bgColor ? "#000" : done ? theme.fontSub : theme.fontColor};
+		+bgColor
+			? done
+				? "#5c5c5c"
+				: "#000"
+			: done
+			? theme.fontSub
+			: theme.fontColor};
 	background: ${({ bgColor, theme }) =>
 		+bgColor ? colors[+bgColor] : theme.bgSub};
 	border-radius: 10px;

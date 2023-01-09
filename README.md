@@ -4,8 +4,22 @@
 
 ## 구현한 기능
 
-- 현재 시간, 날짜 출력 (No external library)
-- 12가지 색상으로 알록달록 목록 꾸미기가 가능
+- 현재 날짜 출력 (1분마다 실시간 업데이트)
+  <br/>
+- 완료된 목록, 즐겨찾기 목록 관리 가능
+  <img src="public/images/demo1.png" alt="demo1">
+  <br/>
+- 12가지 색상으로 알록달록 목록 꾸미기
+  <img src="public/images/demo2.png" alt="demo2">
+  <br/>
+- 목록 생성, 수정, 삭제 기능
+  <img src="public/images/demo3.png" alt="demo3">
+  <br/>
+- 다크 모드 토글 지원
+  <img src="public/images/demo4.png" alt="demo4">
+  <br/>
+- 반응형 완벽 지원
+  <br/>
 
 ## fix 필요
 

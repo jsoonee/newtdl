@@ -52,7 +52,7 @@ const Confirm = styled.div`
 	position: absolute;
 	display: flex;
 	background-color: webgray;
-	right: -3rem;
+	left: -0.8rem;
 	bottom: 3rem;
 	svg {
 		height: 20px;

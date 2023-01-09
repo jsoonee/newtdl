@@ -37,7 +37,13 @@ const TextArea = styled.textarea<IStyled>`
 		outline: none;
 	}
 	color: ${({ bgColor, done, theme }) =>
-		+bgColor ? "#000" : done ? theme.fontSub : theme.fontColor};
+		+bgColor
+			? done
+				? "#5c5c5c"
+				: "#000"
+			: done
+			? theme.fontSub
+			: theme.fontColor};
 	text-decoration: ${(props) => (props.done ? "line-through" : "none")};
 	::placeholder {
 		color: ${({ theme, bgColor }) => (+bgColor ? "#5c5c5c" : theme.fontSub)};

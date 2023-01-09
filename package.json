@@ -30,7 +30,7 @@
 			"react-app/jest"
 		]
 	},
-	"homepage": "https://jsoonee.github.io/newtdl",
+	"homepage": "https://jsoonee.github.io/newtdl/",
 	"browserslist": {
 		"production": [
 			">0.2%",
