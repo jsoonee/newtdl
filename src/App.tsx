@@ -1,13 +1,25 @@
 import { GlobalStyle } from "./global-style";
-import Main from "./components/Main";
+import { ThemeProvider } from "context/ThemeContext";
+import { ListProvider } from "context/ListContext";
+import { EditProvider } from "context/EditContext";
+import Main from "./components/main/Main";
+import { ItemProvider } from "context/ItemContext";
 
-function App() {
+const App = () => {
 	return (
 		<div className="App">
-			<GlobalStyle />
-			<Main />
+			<ThemeProvider>
+				<ListProvider>
+					<EditProvider>
+						<ItemProvider>
+							<GlobalStyle />
+							<Main />
+						</ItemProvider>
+					</EditProvider>
+				</ListProvider>
+			</ThemeProvider>
 		</div>
 	);
-}
+};
 
 export default App;
