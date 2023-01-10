@@ -9,6 +9,10 @@ interface ITheme {
 }
 
 export const GlobalStyle = createGlobalStyle<ITheme>`
+  :root {
+    --vh: 100%;
+  }
+
   * {
 	  margin: 0;
 	  padding: 0;
@@ -21,19 +25,16 @@ export const GlobalStyle = createGlobalStyle<ITheme>`
     -moz-user-select:none;
     -ms-user-select:none;
     user-select: none;
-    color: ${({ theme }) => theme.fontColor};
-    background: ${({ theme }) => theme.bgMain};
-    transition: all 0.5s ease-in-out;
   }
 
   .App {
 	  display: flex;
 	  justify-content: center;
 	  width: 100%;
-	  min-height: 100vh;
-    @supports (-webkit-touch-callout: none) {
-      min-height: -webkit-fill-available;
-    }
+	  height: calc(var(--vh, 1vh) * 100);
+    color: ${({ theme }) => theme.fontColor};
+    background-color: ${({ theme }) => theme.bgMain};
+    transition: color 0.5s, background-color 0.5s;
   }
 
   a {

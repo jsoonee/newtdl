@@ -58,8 +58,9 @@ const ItemBg = styled.li<IStyled>`
 			: done
 			? theme.fontSub
 			: theme.fontColor};
-	background: ${({ bgColor, theme }) =>
+	background-color: ${({ bgColor, theme }) =>
 		+bgColor ? colors[+bgColor] : theme.bgSub};
+	transition: color 0.5s, background-color 0.5s;
 	border-radius: 10px;
 	box-shadow: 0 2px 3px -2px ${({ theme }) => (theme.isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.5)")};
 `;

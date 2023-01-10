@@ -18,7 +18,6 @@ const Wrapper = styled.div<{ theme: Theme }>`
 	border-radius: 10px;
 	margin-bottom: 1rem;
 	box-shadow: 0 2px 3px -2px ${({ theme }) => (theme.isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)")};
-	transition: all 0.5s ease-in-out;
 `;
 
 export const Checkbox = styled.div`

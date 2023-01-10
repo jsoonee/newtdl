@@ -15,7 +15,6 @@ const Wrapper = styled.div`
 	max-width: 800px;
 	padding: 0 1rem 1rem 2rem;
 	border-radius: 30px;
-	transition: all 0.5s ease-in-out;
 	@media screen and (max-width: 320px) {
 		padding: 0 0.5rem 1rem 1rem;
 	}
