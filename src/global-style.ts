@@ -30,9 +30,9 @@ export const GlobalStyle = createGlobalStyle<ITheme>`
 	  display: flex;
 	  justify-content: center;
 	  width: 100%;
-	  height: 100vh;
-    @supports(-webkit-touch-callout: none) {
-      height: -webkit-fill-available;
+	  min-height: 100vh;
+    @supports (-webkit-touch-callout: none) {
+      min-height: -webkit-fill-available;
     }
   }
 
