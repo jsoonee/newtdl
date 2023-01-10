@@ -84,7 +84,12 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 		const vh = window.innerHeight * 0.01;
 		document.documentElement.style.setProperty("--vh", `${vh}px`);
 	};
-	useEffect(() => setScreenSize, []);
+
+	useEffect(() => {
+		setScreenSize();
+		window.addEventListener("resize", setScreenSize);
+	}, []);
+
 	return (
 		<ThemeContext.Provider value={{ theme, toggleTheme }}>
 			<StyledThemeProvider theme={theme.isDark ? darkTheme : lightTheme}>
