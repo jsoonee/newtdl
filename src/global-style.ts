@@ -31,6 +31,9 @@ export const GlobalStyle = createGlobalStyle<ITheme>`
 	  justify-content: center;
 	  width: 100%;
 	  height: 100vh;
+    @supports(-webkit-touch-callout: none) {
+      height: -webkit-fill-available;
+    }
   }
 
   a {

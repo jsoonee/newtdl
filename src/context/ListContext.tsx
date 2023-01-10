@@ -91,7 +91,7 @@ const reducer = (state: IList[], action: IAction): IList[] => {
 				const newList = state.map((value: IList) =>
 					value.id === action.id ? { ...value, star: !value.star } : value
 				);
-				setList(newList);
+				setList(sortList(newList));
 				return newList;
 			}
 		case "DELETE":
