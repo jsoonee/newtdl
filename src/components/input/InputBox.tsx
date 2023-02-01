@@ -22,6 +22,7 @@ const Task = styled.div<IStyled>`
 	svg {
 		height: 20px;
 	}
+	transition: background-color 0.3s;
 `;
 
 const TextArea = styled.textarea<IStyled>`
@@ -48,6 +49,7 @@ const TextArea = styled.textarea<IStyled>`
 	::placeholder {
 		color: ${({ theme, bgColor }) => (+bgColor ? "#5c5c5c" : theme.fontSub)};
 	}
+	transition: background-color 0.3s;
 `;
 
 const InputBox = ({ clickSubmit }: { clickSubmit: () => void }) => {
@@ -70,13 +72,6 @@ const InputBox = ({ clickSubmit }: { clickSubmit: () => void }) => {
 		setListItem((prevState) => ({ ...prevState, task: e.target.value }));
 	};
 
-	const inputEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-		if (e.key === "Enter") {
-			e.preventDefault();
-			clickSubmit();
-		}
-	};
-
 	return (
 		<Task theme={theme} bgColor={listItem.color}>
 			<CheckBox
@@ -94,7 +89,6 @@ const InputBox = ({ clickSubmit }: { clickSubmit: () => void }) => {
 				onKeyDown={(e) => {
 					if (e.key === "Enter") e.preventDefault();
 				}}
-				onKeyUp={inputEnter}
 				ref={taskRef}
 				spellCheck={false}
 			/>

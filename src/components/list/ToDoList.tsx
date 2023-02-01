@@ -50,6 +50,7 @@ const Left = styled.div`
 `;
 
 const ItemBg = styled.li<IStyled>`
+	margin-bottom: 1rem;
 	color: ${({ bgColor, done, theme }) =>
 		+bgColor
 			? done
@@ -60,23 +61,28 @@ const ItemBg = styled.li<IStyled>`
 			: theme.fontColor};
 	background-color: ${({ bgColor, theme }) =>
 		+bgColor ? colors[+bgColor] : theme.bgSub};
-	transition: color 0.5s, background-color 0.5s;
+	transition: color 0.5s, background-color 0.3s;
 	border-radius: 10px;
 	box-shadow: 0 2px 3px -2px ${({ theme }) => (theme.isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.5)")};
 `;
 
-const Item = styled.div`
+const Item = styled.div<{ bgColor: string }>`
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 1rem;
 	border-radius: 10px;
 	svg {
 		height: 20px;
 	}
 	cursor: pointer;
-	:hover {
-		background: ${({ theme }) =>
-			theme.isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"};
+	@media (hover: hover) {
+		:hover {
+			background: ${({ bgColor, theme }) =>
+				+bgColor
+					? "rgba(0,0,0,0.1)"
+					: theme.isDark
+					? "rgba(255,255,255,0.1)"
+					: "rgba(0,0,0,0.05)"};
+		}
 	}
 `;
 
@@ -105,14 +111,16 @@ const Important = styled.div<{ star: boolean; color: string; bgColor: string }>`
 	.emptystar-1 {
 		display: ${(props) => (props.star ? "none" : "block")};
 	}
-	:hover {
-		.fullstar-1 {
-			display: block;
-			opacity: ${(props) => (props.star ? "0.7" : "0.3")};
-		}
-	}
 	.emptystar-1 {
 		fill: ${({ color, bgColor }) => (+bgColor ? "#000" : color)};
+	}
+	@media (hover: hover) {
+		:hover {
+			.fullstar-1 {
+				display: block;
+				opacity: ${(props) => (props.star ? "0.7" : "0.3")};
+			}
+		}
 	}
 `;
 
@@ -120,7 +128,7 @@ const ToDoList = () => {
 	const { theme } = useContext(ThemeContext);
 	const { list, dispatch } = useContext(ListContext);
 	const { openEdit, setOpenEdit } = useContext(EditContext);
-	const { setListItem } = useContext(ItemContext);
+	const { listItem, setListItem } = useContext(ItemContext);
 
 	const clickItem = (e: React.MouseEvent, value: IList) => {
 		if (e.target !== e.currentTarget) return;
@@ -131,20 +139,20 @@ const ToDoList = () => {
 	return (
 		<Wrapper>
 			<List>
-				{openEdit === true || !list.length ? <InputToDo /> : null}
-				{list.map((value, index) => {
+				{openEdit < 0 || !list.length ? <InputToDo /> : null}
+				{list.map((value) => {
 					const { id, done, task, color, star, time } = value;
 					return openEdit === id ? (
-						<InputToDo key={index} />
+						<InputToDo key={id} />
 					) : (
 						<ItemBg
 							draggable
-							key={index}
+							key={id}
 							bgColor={color}
 							done={done}
 							theme={theme}
 						>
-							<Item onClick={(e) => clickItem(e, value)}>
+							<Item bgColor={color} onClick={(e) => clickItem(e, value)}>
 								<Left>
 									<CheckBox id={id} bgColor={color} done={done} />
 									<Task done={done} onClick={(e) => clickItem(e, value)}>
@@ -157,6 +165,15 @@ const ToDoList = () => {
 									bgColor={color}
 									onClick={(e) => {
 										e.stopPropagation();
+										if (openEdit > 0) {
+											if (list[id - 1].star && openEdit > id) {
+												setOpenEdit(openEdit - 1);
+												setListItem({ ...listItem, id: openEdit - 1 });
+											} else if (!list[id - 1].star && openEdit < id) {
+												setOpenEdit(openEdit + 1);
+												setListItem({ ...listItem, id: openEdit + 1 });
+											}
+										}
 										dispatch({ type: "STAR", id: id });
 									}}
 								>

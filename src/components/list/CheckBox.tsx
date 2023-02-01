@@ -36,21 +36,25 @@ const Wrapper = styled.div<{ theme: Theme; bgColor: string; isCheck: boolean }>`
 				? theme.fontColor
 				: theme.check};
 	}
-	:hover {
-		.check-1 {
-			display: block;
-			stroke: ${({ theme, bgColor }) => (+bgColor ? "#000" : theme.fontColor)};
-			opacity: ${(props) => (props.isCheck ? "1" : "0.3")};
-		}
-		.uncheck-1 {
-			fill: ${({ theme, bgColor, isCheck }) =>
-				+bgColor
-					? isCheck
-						? "#5c5c5c"
-						: "#000"
-					: isCheck
-					? theme.check
-					: theme.fontColor};
+
+	@media (hover: hover) {
+		:hover {
+			.check-1 {
+				display: block;
+				stroke: ${({ theme, bgColor }) =>
+					+bgColor ? "#000" : theme.fontColor};
+				opacity: ${(props) => (props.isCheck ? "1" : "0.3")};
+			}
+			.uncheck-1 {
+				fill: ${({ theme, bgColor, isCheck }) =>
+					+bgColor
+						? isCheck
+							? "#5c5c5c"
+							: "#000"
+						: isCheck
+						? theme.check
+						: theme.fontColor};
+			}
 		}
 	}
 `;
@@ -70,7 +74,7 @@ const CheckBox = ({
 	const { setListItem } = useContext(ItemContext);
 
 	const onClick = () => {
-		if (openEdit || openEdit === 0) {
+		if (openEdit) {
 			setListItem((prev) => ({
 				...prev,
 				done: !done,

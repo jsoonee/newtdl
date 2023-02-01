@@ -27,11 +27,11 @@ const Wrapper = styled.div`
 
 const Btn = styled.div`
 	cursor: pointer;
+	display: flex;
+	align-items: center;
 	:hover {
 		opacity: 0.7;
 	}
-	display: flex;
-	align-items: center;
 `;
 
 const Picker = styled.div<{ isDark: boolean; theme: Theme }>`
@@ -51,7 +51,7 @@ const Picker = styled.div<{ isDark: boolean; theme: Theme }>`
 	input[type="radio"]:checked + .color-label {
 		border: 3px solid
 			${({ isDark }) =>
-				isDark ? "rgba(255, 255, 255 ,0.5)" : "rgba(0,0,0,0.5)"};
+				isDark ? "rgba(180, 180, 180, 0.8)" : "rgba(0,0,0,0.5)"};
 		:hover {
 			opacity: 1;
 		}
@@ -70,15 +70,23 @@ const Picker = styled.div<{ isDark: boolean; theme: Theme }>`
 		)}
 `;
 
-const Label = styled.label`
+const Label = styled.label<{ isDark: boolean; firstChild: boolean }>`
 	display: block;
 	width: 30px;
 	height: 30px;
 	margin: 0.5rem 0.3rem;
 	border-radius: 50%;
+	border: ${({ isDark, firstChild }) =>
+		firstChild
+			? isDark
+				? "1px solid rgba(255,255,255,0.3)"
+				: "1px solid rgba(0,0,0,0.2)"
+			: "0"};
 	cursor: pointer;
-	:hover {
-		opacity: 0.7;
+	@media (hover: hover) {
+		:hover {
+			opacity: 0.7;
+		}
 	}
 `;
 
@@ -136,6 +144,8 @@ const ColorPicker = () => {
 									defaultChecked={+listItem.color === index ? true : false}
 								/>
 								<Label
+									isDark={theme.isDark}
+									firstChild={!index}
 									data-id={index}
 									className={"color-label " + id}
 									htmlFor={id}

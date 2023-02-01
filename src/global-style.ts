@@ -10,14 +10,17 @@ interface ITheme {
 
 export const GlobalStyle = createGlobalStyle<ITheme>`
   :root {
-    --vh: 100%;
+    --vh: 100vh;
   }
-
   * {
 	  margin: 0;
 	  padding: 0;
     box-sizing: border-box;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: '맑은 고딕', 'malgun gothic', 'Apple SD Gothic Neo', 'Apple SD 산돌고딕 Neo', 'Microsoft NeoGothic', 'Droid sans', sans-serif;
+  }
+
+  html, body, #root, .App, main {
+    height: 100%;
   }
 
   body {
@@ -31,9 +34,8 @@ export const GlobalStyle = createGlobalStyle<ITheme>`
 	  display: flex;
 	  justify-content: center;
 	  width: 100%;
-	  height: calc(var(--vh, 1vh) * 100);
+    height: 100%;
     color: ${({ theme }) => theme.fontColor};
-    background-color: ${({ theme }) => theme.bgMain};
     transition: color 0.5s, background-color 0.5s;
   }
 

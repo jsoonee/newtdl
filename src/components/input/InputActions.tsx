@@ -1,8 +1,8 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "context/ThemeContext";
 import { ListContext } from "context/ListContext";
 import { EditContext } from "context/EditContext";
-import { ItemContext } from "context/ItemContext";
+import { initialState, ItemContext } from "context/ItemContext";
 import styled from "styled-components";
 
 import { ReactComponent as TrashIcon } from "assets/trash.svg";
@@ -93,8 +93,10 @@ const Cancel = styled.div`
 		height: 30px;
 	}
 	cursor: pointer;
-	:hover {
-		opacity: 0.7;
+	@media (hover: hover) {
+		:hover {
+			opacity: 0.7;
+		}
 	}
 	margin: 0 1rem;
 `;
@@ -105,9 +107,12 @@ const SubmitBtn = styled.button`
 	svg {
 		height: 40px;
 	}
-	:hover {
-		cursor: pointer;
-		opacity: 0.7;
+
+	@media (hover: hover) {
+		:hover {
+			cursor: pointer;
+			opacity: 0.7;
+		}
 	}
 `;
 
@@ -116,11 +121,12 @@ const InputActions = ({ clickSubmit }: { clickSubmit: () => void }) => {
 	const { theme } = useContext(ThemeContext);
 	const { list, dispatch } = useContext(ListContext);
 	const { openEdit, setOpenEdit } = useContext(EditContext);
-	const { listItem } = useContext(ItemContext);
+	const { listItem, setListItem } = useContext(ItemContext);
 
 	const clickDelete = () => {
 		dispatch({ type: "DELETE", id: listItem.id });
-		setOpenEdit(list.length <= 1 ? true : false);
+		setOpenEdit(list.length <= 1 ? -1 : 0);
+		setListItem(initialState);
 	};
 
 	const deleteCancel = () => {
@@ -128,12 +134,29 @@ const InputActions = ({ clickSubmit }: { clickSubmit: () => void }) => {
 	};
 
 	const clickCancel = () => {
-		setOpenEdit(false);
+		setOpenEdit(0);
+		setListItem(initialState);
 	};
+
+	const onKeyDown = (e: any) => {
+		if (!openEdit) return;
+		if (e.key === "Enter") {
+			clickSubmit();
+		} else if (e.key === "Escape") {
+			clickCancel();
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("keydown", onKeyDown);
+		return () => {
+			document.removeEventListener("keydown", onKeyDown);
+		};
+	}, [listItem]);
 
 	return (
 		<Btn color={theme.fontColor}>
-			{list.length && typeof openEdit === "number" ? (
+			{list.length && openEdit > 0 ? (
 				<Delete>
 					<Trash onClick={() => setConfirm(!confirm)}>
 						<TrashIcon />

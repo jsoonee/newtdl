@@ -63,9 +63,11 @@ const useDarkMode = () => {
 	const toggleTheme = () => {
 		if (themeInfo.theme === lightTheme) {
 			setTheme("dark");
+			document.body.style.backgroundColor = "#111";
 			setThemeInfo({ theme: darkTheme, userClick: "dark" });
 		} else {
 			setTheme("light");
+			document.body.style.backgroundColor = "#eaeaea";
 			setThemeInfo({ theme: lightTheme, userClick: "light" });
 		}
 	};
@@ -80,16 +82,6 @@ const ThemeContext = createContext<IContext>({
 
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 	const { theme, toggleTheme } = useDarkMode();
-	const setScreenSize = () => {
-		const vh = window.innerHeight * 0.01;
-		document.documentElement.style.setProperty("--vh", `${vh}px`);
-	};
-
-	useEffect(() => {
-		setScreenSize();
-		window.addEventListener("resize", setScreenSize);
-	}, []);
-
 	return (
 		<ThemeContext.Provider value={{ theme, toggleTheme }}>
 			<StyledThemeProvider theme={theme.isDark ? darkTheme : lightTheme}>

@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, createContext, Dispatch } from "react";
+import React, { useReducer, createContext, Dispatch } from "react";
 
 export interface IList {
 	id: number;
@@ -36,7 +36,7 @@ const sortList = (list: IList[]) => {
 	const sorted = list.sort((a, b) => +b.star - +a.star);
 	return sorted.map((item, index) => ({
 		...item,
-		id: index,
+		id: index + 1,
 	}));
 };
 
@@ -51,19 +51,39 @@ const reducer = (state: IList[], action: IAction): IList[] => {
 				return state;
 			}
 		case "EDIT":
-			const editedList = sortList(
-				state.map((value: any) =>
-					value.id === action.id ? action.item : value
-				)
-			);
-			setList(editedList);
-			return editedList;
+			if (
+				action.id &&
+				action.item &&
+				!state[action.id - 1].star &&
+				action.item.star
+			) {
+				const copied = [...state];
+				copied.splice(action.id - 1, 1);
+				copied.unshift(action.item);
+				const editedList = copied.map((value: IList, index: number) => ({
+					...value,
+					id: index + 1,
+				}));
+				setList(editedList);
+				return editedList;
+			} else {
+				const editedList = sortList(
+					state.map((value: any) =>
+						value.id === action.id ? action.item : value
+					)
+				);
+				setList(editedList);
+				return editedList;
+			}
 		case "DRAG":
 			if (typeof action.from === "number" && typeof action.to === "number") {
 				const copied = [...state];
 				copied.splice(action.from, 1);
 				copied.splice(action.to, 0, state[action.from]);
-				const newList = copied.map((item, index) => ({ ...item, id: index }));
+				const newList = copied.map((item, index) => ({
+					...item,
+					id: index + 1,
+				}));
 				setList(newList);
 				return newList;
 			} else {
@@ -76,14 +96,14 @@ const reducer = (state: IList[], action: IAction): IList[] => {
 			setList(checkedList);
 			return checkedList;
 		case "STAR":
-			if (action.id && !state[action.id].star) {
+			if (action.id && !state[action.id - 1].star) {
 				const copied = [...state];
-				const item = state[action.id];
-				copied.splice(action.id, 1);
+				const item = state[action.id - 1];
+				copied.splice(action.id - 1, 1);
 				copied.unshift({ ...item, star: true });
 				const newList = copied.map((value: IList, index: number) => ({
 					...value,
-					id: index,
+					id: index + 1,
 				}));
 				setList(newList);
 				return newList;
@@ -91,13 +111,14 @@ const reducer = (state: IList[], action: IAction): IList[] => {
 				const newList = state.map((value: IList) =>
 					value.id === action.id ? { ...value, star: !value.star } : value
 				);
-				setList(sortList(newList));
-				return newList;
+				const sorted = sortList(newList);
+				setList(sorted);
+				return sorted;
 			}
 		case "DELETE":
 			const deletedList = state
 				.filter((value: IList) => value.id !== action.id)
-				.map((el: IList, index: number) => ({ ...el, id: index }));
+				.map((el: IList, index: number) => ({ ...el, id: index + 1 }));
 			setList(deletedList);
 			return deletedList;
 		default:

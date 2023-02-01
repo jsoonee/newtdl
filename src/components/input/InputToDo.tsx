@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ThemeContext } from "context/ThemeContext";
 import { ListContext } from "context/ListContext";
 import { EditContext } from "context/EditContext";
-import { ItemContext } from "context/ItemContext";
+import { initialState, ItemContext } from "context/ItemContext";
 import { Theme } from "theme/theme";
 import styled from "styled-components";
 
@@ -18,6 +18,7 @@ const Wrapper = styled.div<{ theme: Theme }>`
 	border-radius: 10px;
 	margin-bottom: 1rem;
 	box-shadow: 0 2px 3px -2px ${({ theme }) => (theme.isDark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)")};
+	transition: background-color 0.3s;
 `;
 
 export const Checkbox = styled.div`
@@ -27,12 +28,14 @@ export const Checkbox = styled.div`
 	svg {
 		height: 20px;
 	}
-	:hover {
-		cursor: pointer;
-		.check-1 {
-			display: block;
+	@media (hover: hover) {
+		:hover {
+			cursor: pointer;
+			.check-1 {
+				display: block;
+			}
+			opacity: 0.7;
 		}
-		opacity: 0.7;
 	}
 `;
 
@@ -47,16 +50,17 @@ const InputToDo = () => {
 	const { theme } = useContext(ThemeContext);
 	const { dispatch } = useContext(ListContext);
 	const { openEdit, setOpenEdit } = useContext(EditContext);
-	const { listItem } = useContext(ItemContext);
+	const { listItem, setListItem } = useContext(ItemContext);
 
 	const clickSubmit = () => {
 		if (!listItem.task.length) return;
-		if (openEdit === true) {
+		if (openEdit < 0) {
 			dispatch({ type: "CREATE", item: listItem });
 		} else {
 			dispatch({ type: "EDIT", id: listItem.id, item: listItem });
 		}
-		setOpenEdit(false);
+		setOpenEdit(0);
+		setListItem(initialState);
 	};
 
 	return (

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ColorPicker from "./ColorPicker";
 
 import { ReactComponent as Star } from "assets/star.svg";
-import { ReactComponent as Clock } from "assets/clock.svg";
+// import { ReactComponent as Clock } from "assets/clock.svg";
 
 const Option = styled.div<{ color: string }>`
 	display: flex;
@@ -36,23 +36,25 @@ const Important = styled.div<{ star: boolean }>`
 	.emptystar-1 {
 		display: ${(props) => (props.star ? "none" : "block")};
 	}
-	:hover {
-		.fullstar-1 {
-			display: block;
-			opacity: ${(props) => (props.star ? "0.7" : "0.3")};
+	cursor: pointer;
+	@media (hover: hover) {
+		:hover {
+			.fullstar-1 {
+				display: block;
+				opacity: ${(props) => (props.star ? "0.7" : "0.3")};
+			}
 		}
 	}
-	cursor: pointer;
 `;
 
-const Time = styled.div`
-	display: flex;
-	align-items: center;
-	:hover {
-		opacity: 0.7;
-	}
-	cursor: pointer;
-`;
+// const Time = styled.div`
+// 	display: flex;
+// 	align-items: center;
+// 	:hover {
+// 		opacity: 0.7;
+// 	}
+// 	cursor: pointer;
+// `;
 
 const InputOptions = () => {
 	const { theme } = useContext(ThemeContext);
@@ -72,9 +74,9 @@ const InputOptions = () => {
 			>
 				<Star />
 			</Important>
-			<Time>
+			{/* <Time>
 				<Clock />
-			</Time>
+			</Time> */}
 		</Option>
 	);
 };

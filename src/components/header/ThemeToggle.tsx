@@ -11,8 +11,10 @@ const Wrapper = styled.div`
 		width: 30px;
 	}
 	cursor: pointer;
-	:hover {
-		opacity: 0.7;
+	@media (hover: hover) {
+		:hover {
+			opacity: 0.7;
+		}
 	}
 `;
 

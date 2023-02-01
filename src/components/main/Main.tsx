@@ -11,7 +11,6 @@ import AddButton from "./AddButton";
 const Wrapper = styled.div`
 	position: relative;
 	width: 100%;
-	height: 100vh;
 	max-width: 800px;
 	padding: 0 1rem 1rem 2rem;
 	border-radius: 30px;
@@ -28,7 +27,7 @@ const Main = () => {
 		<Wrapper>
 			<Header />
 			<ToDoList />
-			{openEdit === false && list.length ? <AddButton /> : null}
+			{!openEdit && list.length ? <AddButton /> : null}
 		</Wrapper>
 	);
 };

@@ -2,8 +2,8 @@ import React, { useState, createContext, useContext } from "react";
 import { ListContext } from "./ListContext";
 
 interface IState {
-	openEdit: number | boolean;
-	setOpenEdit: React.Dispatch<React.SetStateAction<number | boolean>>;
+	openEdit: number;
+	setOpenEdit: React.Dispatch<React.SetStateAction<number>>;
 }
 
 // const getEdit = () => {
@@ -20,15 +20,13 @@ interface IState {
 // };
 
 const EditContext = createContext<IState>({
-	openEdit: true,
+	openEdit: -1,
 	setOpenEdit: () => null,
 });
 
 const EditProvider = ({ children }: { children: React.ReactNode }) => {
 	const { list } = useContext(ListContext);
-	const [openEdit, setOpenEdit] = useState<number | boolean>(
-		list.length ? false : true
-	);
+	const [openEdit, setOpenEdit] = useState<number>(list.length ? 0 : -1);
 
 	return (
 		<EditContext.Provider value={{ openEdit, setOpenEdit }}>
