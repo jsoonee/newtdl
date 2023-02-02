@@ -87,7 +87,7 @@ const Item = styled.div<{ bgColor: string }>`
 `;
 
 const Task = styled.div<{ done: boolean }>`
-	margin: 1rem 0;
+	padding: 1rem 0;
 	text-decoration: ${(props) => (props.done ? "line-through" : "none")};
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -131,6 +131,7 @@ const ToDoList = () => {
 	const { listItem, setListItem } = useContext(ItemContext);
 
 	const clickItem = (e: React.MouseEvent, value: IList) => {
+    console.log('click');
 		if (e.target !== e.currentTarget) return;
 		setOpenEdit(value.id);
 		setListItem(value);
