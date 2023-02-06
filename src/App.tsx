@@ -1,9 +1,11 @@
 import { GlobalStyle } from "./global-style";
-import { ThemeProvider } from "context/ThemeContext";
-import { ListProvider } from "context/ListContext";
-import { EditProvider } from "context/EditContext";
+import {
+	ThemeProvider,
+	ListProvider,
+	EditProvider,
+	ItemProvider,
+} from "context";
 import Main from "./components/main/Main";
-import { ItemProvider } from "context/ItemContext";
 
 const App = () => {
 	return (

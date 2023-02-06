@@ -52,7 +52,7 @@ const TextArea = styled.textarea<IStyled>`
 	transition: background-color 0.3s;
 `;
 
-const InputBox = ({ clickSubmit }: { clickSubmit: () => void }) => {
+const InputBox = () => {
 	const taskRef = useRef<HTMLTextAreaElement>(null);
 	const { theme } = useContext(ThemeContext);
 	const { openEdit } = useContext(EditContext);

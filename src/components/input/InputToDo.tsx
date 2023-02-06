@@ -65,7 +65,7 @@ const InputToDo = () => {
 
 	return (
 		<Wrapper theme={theme}>
-			<InputBox clickSubmit={clickSubmit} />
+			<InputBox />
 			<Control>
 				<InputOptions />
 				<InputActions clickSubmit={clickSubmit} />

@@ -131,7 +131,7 @@ const ToDoList = () => {
 	const { listItem, setListItem } = useContext(ItemContext);
 
 	const clickItem = (e: React.MouseEvent, value: IList) => {
-    console.log('click');
+		console.log("click");
 		if (e.target !== e.currentTarget) return;
 		setOpenEdit(value.id);
 		setListItem(value);
@@ -142,7 +142,7 @@ const ToDoList = () => {
 			<List>
 				{openEdit < 0 || !list.length ? <InputToDo /> : null}
 				{list.map((value) => {
-					const { id, done, task, color, star, time } = value;
+					const { id, done, task, color, star } = value;
 					return openEdit === id ? (
 						<InputToDo key={id} />
 					) : (
